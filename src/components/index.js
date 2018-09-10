@@ -17,7 +17,11 @@ const existingOfferProps = {
 }
 
 const Index = () => (
-	<Master />
+	<div style={{height: '100vh', display: 'flex', flexFlow: 'column nowrap'}}>
+	    <BrowserRouter>
+			<Master />
+	    <BrowserRouter />	
+	<div />
 )
 
 

@@ -21,7 +21,7 @@ const existingOfferProps = {
 class App extends Component {
   render() {
     return (
-      <div>
+      <div style={{height: '100vh'}}>
       <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"></link>
         <BrowserRouter>
           <Master />

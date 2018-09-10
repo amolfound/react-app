@@ -1,7 +1,12 @@
 import React from 'react'
 import Profile from "./profile"
 import { Link } from 'react-router-dom'
-import { Sidebar, Table, Icon, Segment, Header, Button, Checkbox } from 'semantic-ui-react'
+import { Grid, Table, Icon, Header, Button, Checkbox, Dimmer, Loader } from 'semantic-ui-react'
+
+import {
+  getOffers
+} from './redisApi'
+
 
 class ExistingOffer extends React.Component {
 
@@ -9,22 +14,29 @@ class ExistingOffer extends React.Component {
 		super(props);
 
 		this.state = {
-			offerTable: []
+			loading: true,
+			offerTable: undefined
 		};
 	}
 
-	/*
+	
 	componentDidMount() {
   		let claimed = this.props.claimed ;
-  		let headerArray = ["namespace", "cid", "size", "time", "geo", "rate", "until"];
-		let tableData = [ {namespace: "1", cid: "192.168.1.1", time: "10", size: "10", geo: "asdfs", rate: "10", until: "yolo"},
-		{namespace: "1", cid: "192.168.1.1", time: "20", size: "10", geo: "asdfs", rate: "10", until: "yolo"} ];
-	
-		let offerTable = this.createOfferTable(claimed, headerArray, tableData);		
+		let p1 = getOffers(claimed);
 
-		this.setState({offerTable: offerTable});
+		p1.then(values => {
+	  		let headerArray = ["namespace", "cid", "size", "time", "geo", "rate", "until"];
+			let tableData = [ {namespace: "1", cid: "192.168.1.1", time: "10", size: "10", geo: "asdfs", rate: "10", until: "yolo"},
+			{namespace: "1", cid: "192.168.1.1", time: "20", size: "10", geo: "asdfs", rate: "10", until: "yolo"} ];
+		
+			let offerTable = this.createOfferTable(claimed, headerArray, tableData);		
+
+			this.setState({
+				loading: false,
+				offerTable: offerTable}
+				);
+		})
 	}
-	*/
 
 	createOfferTable(claimed, headerArray, tableData) {
 
@@ -95,18 +107,31 @@ class ExistingOffer extends React.Component {
 
 	render() {
 		let claimed = this.props.claimed;
-		// let { offerTable } = this.state.offerTable;
-
-		let headerArray = ["namespace", "cid", "size", "time", "geo", "rate", "until"];
-		let tableData = [ {namespace: "1", cid: "192.168.1.1", time: "10", size: "10", geo: "asdfs", rate: "10", until: "yolo"},
-		{namespace: "1", cid: "192.168.1.1", time: "20", size: "10", geo: "asdfs", rate: "10", until: "yolo"} ];
-	
-		let offerTable = this.createOfferTable(claimed, headerArray, tableData);
+		
+		let loading = this.state.loading;
+		let offerTable = this.state.offerTable;
 
 		return (
 			<div>
-				<Header as='h1'>{claimed ? "claimed offers" : "unclaimed offers"}</Header>
-				{offerTable}
+				<Grid>
+
+					<Grid.Row> 
+						<Header as='h2'>{claimed ? "claimed offers" : "unclaimed offers"}</Header>
+
+						{
+			              loading ? <Dimmer active> <Loader size='huge'/> </Dimmer> : null
+			            }
+			        </Grid.Row>
+
+			        <Grid.Row>
+						{ 
+			              !loading ?
+			              ((offerTable.length == 0) ? <Icon name='file outline' size='huge' /> :
+			              offerTable) : null
+			            }
+			        </Grid.Row>
+
+	            </Grid>
 			</div>
 		);
 	}

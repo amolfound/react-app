@@ -8,6 +8,7 @@ class PublishedOffers extends React.Component {
 	render() {
 		return (			
 			<div>
+				<Header as='h1'> Published offers </Header>
 				<ExistingOffer claimed = {false} />
 				<ExistingOffer claimed = {true} />
 			</div>

@@ -14,29 +14,24 @@ class Master extends React.Component {
   render() {
 
     return (
-    <BrowserRouter>	
     	<Sidebar.Pushable as={Segment}>
 
-		    <Sidebar as={Menu} animation='push' icon='labeled' inverted vertical visible width='thin'>
+			<Sidebar as={Menu} animation='push' icon='labeled' inverted vertical visible width='thin'>
 		      <Menu.Item as={Link} to="/">
 		        <Icon name='user' />
 		        Profile
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/requestTable">
 		        <Icon name='rss' />
-		        RequestTable
+		        Request table
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/publishedOffers">
 		        <Icon name='upload' />
-		        PublishedOffers
-		      </Menu.Item>
-		      <Menu.Item as={Link} to="/publishedOffers">
-		        <Icon name='upload' />
-		        PublishedOffers
+		        Published offers
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/usageStats">
 		        <Icon name='upload' />
-		        UsageStats
+		        Usage statistics
 		      </Menu.Item>
 		    </Sidebar>
 
@@ -52,7 +47,6 @@ class Master extends React.Component {
 		    </Sidebar.Pusher>
 
   		</Sidebar.Pushable>
-  	</BrowserRouter>	
     );
   }
 }

@@ -14,28 +14,28 @@ class Publisher extends React.Component {
     <BrowserRouter>	
     	<Sidebar.Pushable as={Segment}>
 
-		    <Sidebar as={Menu} animation='push' icon='labeled' inverted vertical visible width='thin'>
+			<Sidebar as={Menu} animation='push' icon='labeled' inverted vertical visible width='thin'>
 		      <Menu.Item as={Link} to="/">
 		        <Icon name='user' />
 		        Profile
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/requestTable">
 		        <Icon name='rss' />
-		        RequestTable
+		        Request table
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/offerForm">
 		        <Icon name='upload' />
-		        OfferForms
-		      </Menu.Item>
+		        Offer forms
+			  </Menu.Item>
 		    </Sidebar>
 
 		    <Sidebar.Pusher >
 		    
-		    <Segment basic>
+			<Segment basic>
 			  <Route exact path='/' component={Profile} />
 			  <Route path='/requestTable' component={RequestTable} />
 			  <Route path='/offerForm' component={OfferForm} />
-		    </Segment>
+			</Segment>
 
 		    </Sidebar.Pusher>
 

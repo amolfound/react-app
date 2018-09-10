@@ -1,5 +1,9 @@
 import React from 'react'
-import { Header, Table } from 'semantic-ui-react'
+import { Grid, Container, Header, Table, Dimmer, Loader, Icon} from 'semantic-ui-react'
+import {
+  getRequestTableHeaders,
+  getRequestTableData
+} from './redisApi'
 
 /*
 [ {timeStamp: "1", requestIP: "192.168.1.1", cid: "10"},
@@ -8,11 +12,32 @@ import { Header, Table } from 'semantic-ui-react'
 
 
 class RequestTable extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+      requestTable: undefined
+    };
   }
 
-  createTableBody(tableData) {
+  
+  componentDidMount() {
+    let p1 = getRequestTableHeaders();
+    let p2 = getRequestTableData();
+
+    Promise.all([p1, p2]).then(values => {
+      let tableData = [ {timeStamp: "1", requestIP: "192.168.1.1", cid: "10"},
+        {timeStamp: "1", requestIP: "192.168.1.1", cid: "10"} ];
+      let requestTable = this.createRequestTable(tableData);    
+      this.setState({
+        requestTable: requestTable,
+        loading: false
+      });
+    })
+  }
+
+  createRequestTable(tableData) {
     let tableBodyArray = tableData.map((tableDataItem) => {
       return(
       <Table.Row>
@@ -23,18 +48,7 @@ class RequestTable extends React.Component {
       )
     })
 
-    return (<Table.Body>{tableBodyArray}</Table.Body>);
-  }
-
-  render() {
-    let tableData = [ {timeStamp: "1", requestIP: "192.168.1.1", cid: "10"},
-  {timeStamp: "1", requestIP: "192.168.1.1", cid: "10"} ];
-
-    return(
-    <div>
-      
-      <Header as='h1'>Request log</Header>
-
+    let requestTable = 
       <Table celled>
         <Table.Header>
           <Table.Row>
@@ -43,12 +57,49 @@ class RequestTable extends React.Component {
             <Table.HeaderCell>ContentId</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-        
-        {this.createTableBody(tableData)}
-        
+
+        <Table.Body>
+          {tableBodyArray}
+        </Table.Body>
+                
       </Table>
 
-    </div>
+    return requestTable;
+  }
+
+  render() {
+
+   const loading = this.state.loading;
+   const requestTable = this.state.requestTable;
+
+    return(
+      <div>
+
+        <Header as='h1'>Request log</Header>
+
+        <Grid>
+
+          <Grid.Row>
+            {
+              loading ? <Dimmer active> <Loader size='huge'/> </Dimmer> : null
+            }
+
+            <Header as='h3'>
+                Content requests recieved from various sources
+            </Header>
+          </Grid.Row>
+
+          <Grid.Row >
+            { 
+              !loading ?
+              ((requestTable.length == 0) ? <Icon name='file outline' size='huge' /> :
+              requestTable) : null
+            }
+          </Grid.Row>
+          
+        </Grid>
+
+      </div>
     )
   }
 }
