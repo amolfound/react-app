@@ -1,7 +1,7 @@
 import React from 'react'
-import Profile from "./profile"
 import { Link } from 'react-router-dom'
-import { Grid, Table, Icon, Header, Button, Checkbox, Dimmer, Loader } from 'semantic-ui-react'
+import { Grid, Table, Icon, Header, Button, Checkbox, Dimmer, Loader, Image } from 'semantic-ui-react'
+import shortPara from "../images/short-paragraph.png"
 
 import {
   getOffers
@@ -18,7 +18,6 @@ class ExistingOffer extends React.Component {
 			offerTable: undefined
 		};
 	}
-
 	
 	componentDidMount() {
   		let claimed = this.props.claimed ;
@@ -113,24 +112,25 @@ class ExistingOffer extends React.Component {
 
 		return (
 			<div>
+				<Header as='h1'>
+		          {claimed ? "claimed offers" : "unclaimed offers"}
+		        </Header>
+
 				<Grid>
-
-					<Grid.Row> 
-						<Header as='h2'>{claimed ? "claimed offers" : "unclaimed offers"}</Header>
-
-						{
-			              loading ? <Dimmer active> <Loader size='huge'/> </Dimmer> : null
+					<Grid.Row >
+			            {
+			              loading ? 
+			                (
+			                  <Grid.Column>
+			                    <Dimmer active> <Loader size='huge'/> </Dimmer>
+			                    <Image src={shortPara} />
+			                  </Grid.Column>
+			                ) :
+			                (
+			                	((offerTable.length == 0) ? <Icon name='file outline' size='huge' /> : offerTable)
+			                )
 			            }
-			        </Grid.Row>
-
-			        <Grid.Row>
-						{ 
-			              !loading ?
-			              ((offerTable.length == 0) ? <Icon name='file outline' size='huge' /> :
-			              offerTable) : null
-			            }
-			        </Grid.Row>
-
+			        </Grid.Row >
 	            </Grid>
 			</div>
 		);

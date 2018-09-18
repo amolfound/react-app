@@ -4,7 +4,7 @@ import OfferForm from "./offerForm";
 import RequestTable from "./requestTable";
 
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom'
-import { Sidebar, Menu, Icon, Segment, Header, Button, Checkbox, Form } from 'semantic-ui-react'
+import { Sidebar, Menu, Icon, Segment, Header } from 'semantic-ui-react'
 
 class Publisher extends React.Component {
 
@@ -20,12 +20,12 @@ class Publisher extends React.Component {
 		        Profile
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/requestTable">
-		        <Icon name='rss' />
+		        <Icon name='tags' />
 		        Request table
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/offerForm">
-		        <Icon name='upload' />
-		        Offer forms
+		        <Icon name='wpforms' />
+		        Offer form
 			  </Menu.Item>
 		    </Sidebar>
 

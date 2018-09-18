@@ -7,7 +7,7 @@ import UsageStats from "./usageStats";
 
 
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom'
-import { Sidebar, Menu, Icon, Segment, Header, Button, Checkbox, Form } from 'semantic-ui-react'
+import { Sidebar, Menu, Icon, Segment, Header } from 'semantic-ui-react'
 
 class Master extends React.Component {
 
@@ -22,15 +22,15 @@ class Master extends React.Component {
 		        Profile
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/requestTable">
-		        <Icon name='rss' />
+		        <Icon name='upload' />
 		        Request table
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/publishedOffers">
-		        <Icon name='upload' />
+		        <Icon name='tags' />
 		        Published offers
 		      </Menu.Item>
 		      <Menu.Item as={Link} to="/usageStats">
-		        <Icon name='upload' />
+		        <Icon name='disk' />
 		        Usage statistics
 		      </Menu.Item>
 		    </Sidebar>

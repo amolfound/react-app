@@ -42,7 +42,7 @@ class OfferForm extends React.Component {
 
         <Form onSubmit={this.handleSubmit}>
           {this.createFormData(paramArray)}
-          <Button type='submit'>Submit</Button>
+          <Button color='blue' type='submit'>Submit</Button>
         </Form>
 
       </div>

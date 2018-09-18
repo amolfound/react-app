@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Container, Header, Table, Dimmer, Loader, Icon, Image, Progress, Button } from 'semantic-ui-react'
-
+import shortPara from "../images/short-paragraph.png"
 import {
   getUsedStorage,
   getTotalStorage,
@@ -57,21 +57,25 @@ class UsageStats extends React.Component {
     return (
        <div>
 
-       	<Header as='h1'>Usage stats</Header>
+       	<Header as='h1'>
+          Usage stats
+          <Header.Subheader>Resource allocation and usage statistics</Header.Subheader>
+        </Header>
 
        	<Grid >
-	    	<Grid.Row>
-		    	<Header as='h3'>Resource allocation and usage statistics</Header>
-		    	
-	    		{
-	              loading ? <Dimmer active> <Loader size='huge'/> </Dimmer> : null
-		        }
-	    	</Grid.Row>
 
-	    	{
-	    		!loading ?
-			    (
-			    	<Grid.Row columns={2} divided>
+	   		{
+              loading ? 
+                (
+	                <Grid.Row>
+	                  <Grid.Column>
+	                    <Dimmer active> <Loader size='huge'/> </Dimmer>
+	                    <Image src={shortPara} />
+	                  </Grid.Column>
+	                </Grid.Row>
+                ) : 
+                (
+                	<Grid.Row columns={2} divided>
 
 			    		<Grid.Column >
 							<Progress progress='value' value={this.state.usedStorage} total={this.state.totalStorage} />
@@ -82,13 +86,20 @@ class UsageStats extends React.Component {
 						</Grid.Column>
 
 					</Grid.Row>
-				) : null
-			}
-
+                )
+            }
 			{
-			    !loading ?
-			    (
-					<Grid.Row columns={2} divided>
+              loading ? 
+                (
+	                <Grid.Row>
+	                  <Grid.Column>
+	                    <Dimmer active> <Loader size='huge'/> </Dimmer>
+	                    <Image src={shortPara} />
+	                  </Grid.Column>
+	                </Grid.Row>
+                ) : 
+                (
+                	<Grid.Row columns={2} divided>
 
 			    		<Grid.Column>
 							<Progress progress='value' value={this.state.usedBandwidth} total={this.state.maxAllowedBandwidth} />
@@ -99,8 +110,8 @@ class UsageStats extends React.Component {
 						</Grid.Column>
 						
 					</Grid.Row>
-				) : null
-			}
+                )
+            }
 			
 	    </Grid>
 

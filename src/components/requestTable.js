@@ -1,9 +1,11 @@
 import React from 'react'
-import { Grid, Container, Header, Table, Dimmer, Loader, Icon} from 'semantic-ui-react'
+import { Grid, Container, Header, Table, Dimmer, Loader, Icon, Image} from 'semantic-ui-react'
 import {
   getRequestTableHeaders,
   getRequestTableData
 } from './redisApi'
+import shortPara from "../images/short-paragraph.png"
+
 
 /*
 [ {timeStamp: "1", requestIP: "192.168.1.1", cid: "10"},
@@ -75,28 +77,28 @@ class RequestTable extends React.Component {
     return(
       <div>
 
-        <Header as='h1'>Request log</Header>
+        <Header as='h1'>
+          Request log
+          <Header.Subheader>Content requests recieved from various sources</Header.Subheader>
+        </Header>        
 
         <Grid>
-
-          <Grid.Row>
-            {
-              loading ? <Dimmer active> <Loader size='huge'/> </Dimmer> : null
-            }
-
-            <Header as='h3'>
-                Content requests recieved from various sources
-            </Header>
-          </Grid.Row>
-
           <Grid.Row >
-            { 
-              !loading ?
-              ((requestTable.length == 0) ? <Icon name='file outline' size='huge' /> :
-              requestTable) : null
-            }
-          </Grid.Row>
-          
+            {
+              loading ? 
+                (
+                  <Grid.Column>
+                    <Dimmer active> <Loader size='huge'/> </Dimmer>
+                    <Image src={shortPara} />
+                  </Grid.Column>
+                ) : 
+                (
+                  ((requestTable.length == 0) ? <Icon name='file outline' size='huge' /> :
+                  requestTable)
+                )
+              }
+
+          </Grid.Row>          
         </Grid>
 
       </div>

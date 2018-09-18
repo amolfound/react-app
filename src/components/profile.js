@@ -6,6 +6,7 @@ import {
 	getEthBalance,
 	getLinBalance,
 } from './redisApi';
+import shortPara from "../images/short-paragraph.png"
 
 
 class Profile extends React.Component {
@@ -50,52 +51,48 @@ class Profile extends React.Component {
 
 		return (
 		<div>
-			<Header as='h1'>Profile</Header>
+			<Header as='h1'>
+			    Profile
+			    <Header.Subheader>Manage your account settings</Header.Subheader>
+			</Header>
+
 			
 		    <Grid >
-		    	<Grid.Row>
-	    			<Header as='h3'>
-         			   Details about user profile
-        			</Header>
-
+		    	<Grid.Row >
         			{
-		              loading ? <Dimmer active> <Loader size='huge'/> </Dimmer> : null
-		            }
-		    	</Grid.Row>
-
-		    	{
-		    		!loading ? (
-				    	<Grid.Row stackable columns={2}>
-
-				    		<Grid.Column width = {5}>
-				    			<Image src="/static/images/slack.jpg" size='small'/>
-				    		</Grid.Column>
-
-				    		<Grid.Column width = {11}>
-							    <Table celled>
-								    <Table.Body>
-								    	<Table.Row>
-								   	    	<Table.Cell>Id</Table.Cell>
-							        		<Table.Cell>{nodeId}</Table.Cell>
-							      		</Table.Row>
-							      		<Table.Row>
-								   	    	<Table.Cell>EthAddress</Table.Cell>
-							        		<Table.Cell>{ethAddress}</Table.Cell>
-							      		</Table.Row>
-							      		<Table.Row>
-								   	    	<Table.Cell>EthBalance</Table.Cell>
-							        		<Table.Cell>{ethBalance}</Table.Cell>
-							      		</Table.Row>
-							      		<Table.Row>
-											<Table.Cell>LinBalance</Table.Cell>
-							        		<Table.Cell>{linBalance}</Table.Cell>
-							      		</Table.Row>
-							      	</Table.Body>
-							    </Table>
-							</Grid.Column>
-						</Grid.Row> 
-					) : null
-				}
+		              loading ? 
+		              (
+		              	<Grid.Column>
+			              	<Dimmer active> <Loader size='huge'/> </Dimmer>
+			              	<Image src={shortPara} />
+			            </Grid.Column>
+		              ) : 
+		              (
+			    		<Grid.Column>
+						    <Table celled>
+							    <Table.Body>
+							    	<Table.Row>
+							   	    	<Table.Cell>Id</Table.Cell>
+						        		<Table.Cell>{nodeId}</Table.Cell>
+						      		</Table.Row>
+						      		<Table.Row>
+							   	    	<Table.Cell>EthAddress</Table.Cell>
+						        		<Table.Cell>{ethAddress}</Table.Cell>
+						      		</Table.Row>
+						      		<Table.Row>
+							   	    	<Table.Cell>EthBalance</Table.Cell>
+						        		<Table.Cell>{ethBalance}</Table.Cell>
+						      		</Table.Row>
+						      		<Table.Row>
+										<Table.Cell>LinBalance</Table.Cell>
+						        		<Table.Cell>{linBalance}</Table.Cell>
+						      		</Table.Row>
+						      	</Table.Body>
+						    </Table>
+						</Grid.Column>
+					  )
+		          	}
+				</Grid.Row>
 			</Grid>
 			
 		</div>
